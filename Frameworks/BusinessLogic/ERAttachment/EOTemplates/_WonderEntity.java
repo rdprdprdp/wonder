@@ -20,6 +20,43 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 #else
   public static final String ENTITY_NAME = "$entity.name";
 #end
+//added from John Huss
+public static final ${entity.classNameWithoutPackage}Path path = new ${entity.classNameWithoutPackage}Path(null);
+
+public static class ${entity.classNameWithoutPackage}Path extends ERXKey<$entity.className> {
+public ${entity.classNameWithoutPackage}Path(String key) { 
+ super(key);
+}
+
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if ($attribute.name != "count" && $attribute.name != "key" && $attribute.name != "desc")
+public ERXKey<#if($attribute.userInfo.ERXConstantClassName)$attribute.userInfo.ERXConstantClassName#else$attribute.javaClassName#end> ${attribute.name}() {
+ return this.append(${attribute.uppercaseUnderscoreName});
+}
+
+#else
+public ERXKey<#if($attribute.userInfo.ERXConstantClassName)$attribute.userInfo.ERXConstantClassName#else$attribute.javaClassName#end> ${attribute.name}Key() {
+ return this.append(${attribute.uppercaseUnderscoreName});
+}
+
+#end
+#end 
+#foreach ($relationship in $entity.sortedClassRelationships)
+#if ($relationship.actualDestination.classNameWithDefault != "EOGenericRecord")
+#if ($relationship.name != "count" && $relationship.name != "key" && $relationship.name != "desc")
+public ${relationship.actualDestination.className}.${relationship.actualDestination.classNameWithoutPackage}Path ${relationship.name}() { 
+ return new ${relationship.actualDestination.className}.${relationship.actualDestination.classNameWithoutPackage}Path(this.append(${relationship.uppercaseUnderscoreName}).key()); 
+}
+
+#else
+public ${relationship.actualDestination.className}.${relationship.actualDestination.classNameWithoutPackage}Path ${relationship.name}Key() { 
+ return new ${relationship.actualDestination.className}.${relationship.actualDestination.classNameWithoutPackage}Path(this.append(${relationship.uppercaseUnderscoreName}).key()); 
+}
+ 
+#end
+#end
+#end
+}
 
   // Attribute Keys
 #foreach ($attribute in $entity.sortedClassAttributes)

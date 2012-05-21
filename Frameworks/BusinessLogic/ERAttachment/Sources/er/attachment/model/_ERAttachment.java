@@ -14,6 +14,75 @@ import er.extensions.foundation.*;
 @SuppressWarnings("all")
 public abstract class _ERAttachment extends er.extensions.eof.ERXGenericRecord {
   public static final String ENTITY_NAME = "ERAttachment";
+//added from John Huss
+public static final ERAttachmentPath path = new ERAttachmentPath(null);
+
+public static class ERAttachmentPath extends ERXKey<er.attachment.model.ERAttachment> {
+public ERAttachmentPath(String key) { 
+ super(key);
+}
+
+public ERXKey<Boolean> available() {
+ return this.append(AVAILABLE);
+}
+
+public ERXKey<String> configurationName() {
+ return this.append(CONFIGURATION_NAME);
+}
+
+public ERXKey<NSTimestamp> creationDate() {
+ return this.append(CREATION_DATE);
+}
+
+public ERXKey<Integer> height() {
+ return this.append(HEIGHT);
+}
+
+public ERXKey<String> mimeType() {
+ return this.append(MIME_TYPE);
+}
+
+public ERXKey<String> originalFileName() {
+ return this.append(ORIGINAL_FILE_NAME);
+}
+
+public ERXKey<String> ownerID() {
+ return this.append(OWNER_ID);
+}
+
+public ERXKey<Boolean> proxied() {
+ return this.append(PROXIED);
+}
+
+public ERXKey<Integer> size() {
+ return this.append(SIZE);
+}
+
+public ERXKey<String> storageType() {
+ return this.append(STORAGE_TYPE);
+}
+
+public ERXKey<String> thumbnail() {
+ return this.append(THUMBNAIL);
+}
+
+public ERXKey<String> webPath() {
+ return this.append(WEB_PATH);
+}
+
+public ERXKey<Integer> width() {
+ return this.append(WIDTH);
+}
+
+public er.attachment.model.ERAttachment.ERAttachmentPath childrenAttachments() { 
+ return new er.attachment.model.ERAttachment.ERAttachmentPath(this.append(CHILDREN_ATTACHMENTS).key()); 
+}
+
+public er.attachment.model.ERAttachment.ERAttachmentPath parentAttachment() { 
+ return new er.attachment.model.ERAttachment.ERAttachmentPath(this.append(PARENT_ATTACHMENT).key()); 
+}
+
+}
 
   // Attribute Keys
   public static final ERXKey<Boolean> AVAILABLE = new ERXKey<Boolean>("available");

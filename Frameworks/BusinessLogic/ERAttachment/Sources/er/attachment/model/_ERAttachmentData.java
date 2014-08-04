@@ -14,19 +14,6 @@ import er.extensions.foundation.*;
 @SuppressWarnings("all")
 public abstract class _ERAttachmentData extends er.extensions.eof.ERXGenericRecord {
   public static final String ENTITY_NAME = "ERAttachmentData";
-//added from John Huss
-public static final ERAttachmentDataPath path = new ERAttachmentDataPath(null);
-
-public static class ERAttachmentDataPath extends ERXKey<er.attachment.model.ERAttachmentData> {
-public ERAttachmentDataPath(String key) { 
- super(key);
-}
-
-public ERXKey<NSData> data() {
- return this.append(DATA);
-}
-
-}
 
   // Attribute Keys
   public static final ERXKey<NSData> DATA = new ERXKey<NSData>("data");

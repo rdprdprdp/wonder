@@ -68,7 +68,7 @@ public class ERXCachingWrapper extends ERXStatelessComponent {
     	public Object get(Object key) {
     		Entry result = (Entry) super.get(key);
     		if(result != null) {
-    			if(!result.isActive()) {
+    			if(!((er.extensions.components.ERXCachingWrapper.Entry) result).isActive()) {
     				remove(key);
     				result = null;
     			}
